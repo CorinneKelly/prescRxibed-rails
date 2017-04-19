@@ -8,7 +8,7 @@ class ApplicationController < ActionController::API
 
   def logged_in?
     authenticate_or_request_with_http_token do |token, options|
-      Account.from_token
+      Account.from_token(token)
     end
   end
 
