@@ -18,6 +18,7 @@ ActiveRecord::Schema.define(version: 20170417213640) do
   create_table "accounts", force: :cascade do |t|
     t.string   "googleToken"
     t.string   "googleId"
+    t.string   "name"
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
   end
