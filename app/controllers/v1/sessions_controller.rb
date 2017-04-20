@@ -2,6 +2,7 @@ class V1::SessionsController < ApplicationController
   skip_before_action :authenticate
 
   def create
+    
     account = Account.authenticate(account_params[:googleId])
     if account
       account.update(googleToken: account_params[:googleToken])

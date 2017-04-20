@@ -7,9 +7,11 @@ class ApplicationController < ActionController::API
   end
 
   def logged_in?
-    authenticate_or_request_with_http_token do |token, options|
-      Account.from_token(token)
-    end
+    !!current_account
+  end
+
+  def current_account
+    @current_account = Account.from_token(request.headers["token"])
   end
 
 end

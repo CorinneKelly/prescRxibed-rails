@@ -3,25 +3,22 @@ require 'httparty'
 class GoogleCalendar
 	include HTTParty
 
-	def query
-		access_token = ""
+	def postEvent(access_token, request_body)
 		auth_header = { "Authorization": "Bearer #{access_token}",
 										"Content-Type": "application/json" }
-		request_body = {"summary": "Appointment",
-									  "start": {
-									    "dateTime": "2017-04-18T10:00:00.000-07:00"
-									  },
-									  "end": {
-									    "dateTime": "2017-04-19T10:25:00.000-07:00"
-									  }
-									} 
+		# request_body = {"summary": "Appointment",
+		# 							  "start": {
+		# 							    "dateTime": "2017-04-18T10:00:00.000-07:00"
+		# 							  },
+		# 							  "end": {
+		# 							    "dateTime": "2017-04-19T10:25:00.000-07:00"
+		# 							  }
+		# 							}
 		request = HTTParty.post("https://www.googleapis.com/calendar/v3/calendars/primary/events", headers: auth_header, body: request_body.to_json)
-		puts request
 	end
 
 end
 
-GoogleCalendar.new.query
 
 
 
@@ -61,5 +58,3 @@ GoogleCalendar.new.query
 
 	# result = client.insert_event('primary', event)
 	# puts "Event created: #{result.html_link}"
-
-

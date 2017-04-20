@@ -1,0 +1,23 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  account_id: 1
+  schedule_id: 1
+  name: MyString
+  dosage: 1
+  instructions: MyText
+  quantity: 1
+  unit: MyString
+  refills: 1
+  doctor: MyString
+
+two:
+  account_id: 1
+  schedule_id: 1
+  name: MyString
+  dosage: 1
+  instructions: MyText
+  quantity: 1
+  unit: MyString
+  refills: 1
+  doctor: MyString
