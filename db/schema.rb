@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170417213640) do
+ActiveRecord::Schema.define(version: 20170420134050) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -23,4 +23,32 @@ ActiveRecord::Schema.define(version: 20170417213640) do
     t.datetime "updated_at",  null: false
   end
 
+  create_table "prescriptions", force: :cascade do |t|
+    t.integer  "account_id"
+    t.string   "name"
+    t.integer  "dosage"
+    t.text     "instructions"
+    t.integer  "quantity"
+    t.string   "units"
+    t.integer  "refills"
+    t.string   "doctor"
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
+    t.index ["account_id"], name: "index_prescriptions_on_account_id", using: :btree
+  end
+
+  create_table "schedules", force: :cascade do |t|
+    t.integer "prescription_id"
+    t.date    "start_date"
+    t.date    "end_date"
+    t.date    "expiration_date"
+    t.string  "frequency"
+    t.time    "hours",           default: [], array: true
+    t.string  "weekdays",        default: [], array: true
+    t.integer "month_days",      default: [], array: true
+    t.index ["prescription_id"], name: "index_schedules_on_prescription_id", using: :btree
+  end
+
+  add_foreign_key "prescriptions", "accounts"
+  add_foreign_key "schedules", "prescriptions"
 end

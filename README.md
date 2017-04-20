@@ -50,21 +50,10 @@ Drugs
 Name | API INFO
 
 Prescriptions (join table)
-AccountID | DrugID  | ScheduleID | Dosage | Instructions | Expiration Date (optional) | Quantity | uom | RefillsAllowed | Doctor
-
-pills:
-Quantity: 60
-Dosage: 2
-
-syrup
-Quantity: 200
-Dosage: 20
-
-
-
+AccountID | name | Dosage | Instructions |  Quantity | units | refills | Doctor
 
 Schedule
-Type (onGoing or AsNeeded) | Start Date (default to today) | AsNeeded Time Restriction (optional) | onGoing Frequency (daily, weekly, monthly) | Hours | Days | Weeks
+prescription_id | Start Date (default to today) | End Date |  | Expiration Date | Frequency (daily, weekly, monthly) | Hours | Weekdays | monthDays
 
 or CronJobs
 
