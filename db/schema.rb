@@ -30,10 +30,10 @@ ActiveRecord::Schema.define(version: 20170420134050) do
     t.text     "instructions"
     t.integer  "quantity"
     t.string   "units"
-    t.integer  "refills"
+    t.integer  "refills",      default: 0
     t.string   "doctor"
-    t.datetime "created_at",   null: false
-    t.datetime "updated_at",   null: false
+    t.datetime "created_at",               null: false
+    t.datetime "updated_at",               null: false
     t.index ["account_id"], name: "index_prescriptions_on_account_id", using: :btree
   end
 

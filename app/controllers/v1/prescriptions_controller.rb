@@ -1,13 +1,28 @@
-class V1::PrescriptionsController < ApplicationController
 
+class V1::PrescriptionsController < ApplicationController
   def create
+
     account = @current_account
     newPrescription = Prescription.new(prescription_params)
     newPrescription.account_id = account.id
+    newPrescription.save
     newSchedule = Schedule.new(schedule_params)
     newSchedule.prescription_id = newPrescription.id
     newSchedule.save
-    newPrescription.save
+    newEvent = GoogleEventSerializer.new(newPrescription, newSchedule)
+    request_body = newEvent.determineSerializeType
+    byebug
+    if request_body.class == Array
+      response = []
+      request_body.each do |each_request|
+        newApiRequest = GoogleCalendarApi.new(account.googleToken, each_request)
+        response << newApiRequest.postEvent
+      end
+    else
+      newApiRequest = GoogleCalendarApi.new(account.googleToken, request_body)
+      response = newApiRequest.postEvent
+    end
+    byebug
   end
 
 

@@ -7,7 +7,7 @@ class CreatePrescriptions < ActiveRecord::Migration[5.0]
       t.text :instructions
       t.integer :quantity
       t.string :units
-      t.integer :refills
+      t.integer :refills, default: 0
       t.string :doctor
 
       t.timestamps
