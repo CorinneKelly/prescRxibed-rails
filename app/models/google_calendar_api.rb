@@ -16,7 +16,6 @@ class GoogleCalendarApi
 	end
 
 	def getEvents
-		byebug
 		auth_header = { "Authorization": "Bearer #{@access_token}"}
 		@response = HTTParty.get("https://www.googleapis.com/calendar/v3/calendars/primary/events?maxResults=250&q=Prescription&showDeleted=false&singleEvents=true", headers: auth_header)
 	end
