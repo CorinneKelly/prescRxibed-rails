@@ -43,6 +43,12 @@ class V1::PrescriptionsController < ApplicationController
     render json: {symptoms: symptoms, prescription: prescription}
   end
 
+  def destroy
+    @prescription = Prescription.find_by(id: destroy_params[:id])
+    @prescription.destroy
+    redirect_to '/v1/prescriptions'
+  end
+
 
   private
   def prescription_params
@@ -50,5 +56,9 @@ class V1::PrescriptionsController < ApplicationController
   end
   def schedule_params
     params.require(:prescriptionData).require(:schedule).permit(:start_date, :end_date, :expiration_date, :frequency, :hours => [], :weekdays => [], :month_days => [])
+  end
+
+  def destroy_params
+    params.permit(:id)
   end
 end
