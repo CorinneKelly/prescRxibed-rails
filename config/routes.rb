@@ -5,7 +5,7 @@ Rails.application.routes.draw do
     resources :sessions, only: [:create, :destroy]
 
     resources :prescriptions, only: [:create, :index, :show]
-    resources :symptoms, only: [:create]
+    resources :symptoms, only: [:create, :show]
     resources :events, only: [:index]
 
   end

@@ -28,7 +28,7 @@ class GoogleEventSerializer
     @request_body = {
       "summary": "Prescription Reminder: #{@prescription[:name]}",
       "description": "#{@prescription[:instructions]}",
-      "id": "#{@prescription[:name].downcase}000#{@prescription[:id]}",
+      "id": "0000#{@prescription[:id]}",
 
       "start": {
         "dateTime": "#{DateTime.parse(@schedule[:start_date].to_s)+(13/24.0)}",
@@ -54,7 +54,7 @@ class GoogleEventSerializer
      @request_body = {
        "summary": "Prescription Reminder: #{@prescription[:name]}",
        "description": "#{@prescription[:instructions]}",
-       "id": "#{@prescription[:name].downcase}000#{@prescription[:id]}",
+       "id": "0000#{@prescription[:id]}",
 
        "start": {
          "dateTime": "#{DateTime.parse(@schedule[:start_date].to_s)+(13/24.0)}",
@@ -80,7 +80,7 @@ class GoogleEventSerializer
        {
          "summary": "Prescription Reminder: #{@prescription[:name]}",
          "description": "#{@prescription[:instructions]}",
-         "id": "#{@prescription[:name].downcase}000#{@prescription[:id]}#{hour}",
+         "id": "0000#{@prescription[:id]}#{hour}",
 
          "start": {
            "dateTime": "#{DateTime.parse(@schedule[:start_date].to_s)+((hour+4)/24.0)}",

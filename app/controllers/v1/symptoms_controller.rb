@@ -9,7 +9,7 @@ class V1::SymptomsController < ApplicationController
   end
 
   def create
-    prescription = @current_account
+    prescription = Prescription.find(symptom_params[:prescriptionId])
 
     newsymptom = Symptom.create(name: symptom_params[:name])
     newsymptom.prescription_id = prescription.id
@@ -19,12 +19,19 @@ class V1::SymptomsController < ApplicationController
     newsymptomLog.symptom_id = newsymptom.id
     newsymptomLog.save
 
+    byebug
+  end
+
+  def show
+    byebug
+    symptom = Symptom.find_by(id: params[:id])
+    render json: symptom
   end
 
 
   private
   def symptom_params
-    params.require(:symptomData).permit(:name, :severity, :description, uploadedFiles: [:fileName, :url, :publicID]) #should also include array of image ids
+    params.require(:symptomData).permit(:name, :severity, :description, :prescriptionId, uploadedFiles: [:fileName, :url, :publicID]) #should also include array of image ids
   end
 
 end

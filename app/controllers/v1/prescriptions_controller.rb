@@ -9,6 +9,7 @@ class V1::PrescriptionsController < ApplicationController
   end
 
   def create
+    byebug
 
     account = @current_account
 
@@ -19,8 +20,9 @@ class V1::PrescriptionsController < ApplicationController
     newSchedule = Schedule.new(schedule_params)
     newSchedule.prescription_id = newPrescription.id
     newSchedule.save
-
+    
     newEvent = GoogleEventSerializer.new(newPrescription, newSchedule)
+    byebug
     
     request_body = newEvent.determineSerializeType
     if request_body.class == Array
@@ -33,9 +35,11 @@ class V1::PrescriptionsController < ApplicationController
       newApiRequest = GoogleCalendarApi.new(account.googleToken, request_body)
       response = newApiRequest.postEvent
     end
+
   end
 
   def show
+    byebug
     @prescription = Prescription.find_by(id: params[:id])
     @symptoms = @prescription.symptoms
     render json: @symptoms
