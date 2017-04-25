@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170420134050) do
+ActiveRecord::Schema.define(version: 20170424134641) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -47,6 +47,20 @@ ActiveRecord::Schema.define(version: 20170420134050) do
     t.string  "weekdays",        default: [], array: true
     t.integer "month_days",      default: [], array: true
     t.index ["prescription_id"], name: "index_schedules_on_prescription_id", using: :btree
+  end
+
+  create_table "symptom_logs", force: :cascade do |t|
+    t.integer  "symptom_id"
+    t.integer  "severity"
+    t.text     "description"
+    t.jsonb    "uploadedFiles"
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
+  end
+
+  create_table "symptoms", force: :cascade do |t|
+    t.integer "prescription_id"
+    t.string  "name"
   end
 
   add_foreign_key "prescriptions", "accounts"

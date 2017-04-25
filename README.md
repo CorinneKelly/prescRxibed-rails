@@ -61,10 +61,13 @@ Symptoms
 PrescriptionID | Name
 
 Symptom Log
-SymptomsID | Rating | Description | Picture | timeStamp
+SymptomsID | Rating | Description | timeStamp
 
+SymptomLogImage join
+symptomLogID | PictureID
 
-
+possible picture table
+file name | publicID | url
 
 
 Logic:

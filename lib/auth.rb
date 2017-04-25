@@ -5,6 +5,7 @@ class Auth
   end
 
   def self.decode(token)
+  	
     JWT.decode(token, SECRET).first
   end
 end

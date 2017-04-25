@@ -19,10 +19,9 @@ class GoogleEventSerializer
   end
 
   def serializeWeeklyFrequency
-    byebug
     numberOfEvents = ((@prescription[:quantity]/@prescription[:dosage])*(@prescription[:refills]+1)).to_i
     days = @schedule[:weekdays].join(",")
-    freq = "FREQ=WEEKLY;";
+    freq = "FREQ=WEEKLY;"
     count = "COUNT=#{numberOfEvents};"
     rrule = "RRULE:" + freq + count + "BYDAY=" + days
 
@@ -46,7 +45,6 @@ class GoogleEventSerializer
   end
 
   def serializeMonthlyFrequency
-    byebug
      numberOfEvents = ((@prescription[:quantity]/@prescription[:dosage])*(@prescription[:refills]+1)).to_i
      days = @schedule[:month_days].join(",")
      freq = "FREQ=MONTHLY;"

@@ -10,7 +10,6 @@ class GoogleCalendarApi
 	end
 
 	def postEvent
-		byebug
 		auth_header = { "Authorization": "Bearer #{@access_token}",
 										"Content-Type": "application/json" }
 		@response = HTTParty.post("https://www.googleapis.com/calendar/v3/calendars/primary/events", headers: auth_header, body: @request_body.to_json)
