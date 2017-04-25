@@ -33,7 +33,6 @@ class V1::PrescriptionsController < ApplicationController
       newApiRequest = GoogleCalendarApi.new(account.googleToken, request_body)
       response = newApiRequest.postEvent
     end
-    byebug
   end
 
   def show

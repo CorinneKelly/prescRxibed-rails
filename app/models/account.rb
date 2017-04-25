@@ -1,4 +1,5 @@
 class Account < ApplicationRecord
+
 	has_many :prescriptions
 	has_many :symptoms, through: :prescriptions
 
@@ -10,5 +11,5 @@ class Account < ApplicationRecord
   def self.authenticate(googleId)
     account = Account.find_by(googleId: googleId)
   end
-  
+
 end
