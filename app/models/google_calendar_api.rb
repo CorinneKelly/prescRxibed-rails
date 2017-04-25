@@ -4,7 +4,7 @@ class GoogleCalendarApi
 	include HTTParty
 	attr_accessor :access_token, :request_body, :response
 
-	def initialize(access_token, request_body)
+	def initialize(access_token, request_body="")
 		@access_token = access_token
 		@request_body = request_body
 	end
@@ -15,5 +15,12 @@ class GoogleCalendarApi
 										"Content-Type": "application/json" }
 		@response = HTTParty.post("https://www.googleapis.com/calendar/v3/calendars/primary/events", headers: auth_header, body: @request_body.to_json)
 	end
+
+	def getEvents
+		byebug
+		auth_header = { "Authorization": "Bearer #{@access_token}"}
+		@response = HTTParty.get("https://www.googleapis.com/calendar/v3/calendars/primary/events?maxResults=250&q=Prescription&showDeleted=false&singleEvents=true", headers: auth_header)
+	end
+
 
 end
