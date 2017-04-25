@@ -39,7 +39,7 @@ class V1::PrescriptionsController < ApplicationController
   def show
     @prescription = Prescription.find_by(id: params[:id])
     @symptoms = @prescription.symptoms
-    byebug
+    
     render json: @symptoms
   end
 
