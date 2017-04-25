@@ -1,4 +1,6 @@
 class Account < ApplicationRecord
+	has_many :prescriptions
+	has_many :symptoms, through: :prescriptions
 
   def self.from_token(token)
     account_id = Auth.decode(token)["account_id"]

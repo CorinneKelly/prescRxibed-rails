@@ -3,7 +3,8 @@ Rails.application.routes.draw do
 
   namespace :v1 do
     resources :sessions, only: [:create, :destroy]
-    resources :prescriptions, only: [:create]
+    resources :prescriptions, only: [:create, :index, :show]
+    resources :symptoms, only: [:create]
   end
 
 
