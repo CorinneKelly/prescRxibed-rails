@@ -1,6 +1,6 @@
 
 class V1::SymptomsController < ApplicationController
-  
+
   def index
 # moved api call request to prescription show page
     @symptoms = prescription.symptoms
@@ -9,7 +9,7 @@ class V1::SymptomsController < ApplicationController
   end
 
   def create
-    
+
     prescription = Prescription.find(symptom_params[:prescriptionId])
 
     newsymptom = Symptom.new(name: symptom_params[:name])
@@ -19,12 +19,12 @@ class V1::SymptomsController < ApplicationController
     newsymptomLog = SymptomLog.new(severity: symptom_params[:severity], description: symptom_params[:description], uploadedFiles: symptom_params[:uploadedFiles])
     newsymptomLog.symptom_id = newsymptom.id
     newsymptomLog.save
-
+    
   end
 
   def show
     symptom = Symptom.find_by(id: params[:id])
-    
+
     symptomLogs = symptom.symptom_logs
     render json: {symptom: symptom, symptomLogs: symptomLogs}
   end
