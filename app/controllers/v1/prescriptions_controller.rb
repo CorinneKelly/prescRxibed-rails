@@ -37,10 +37,10 @@ class V1::PrescriptionsController < ApplicationController
   end
 
   def show
-    @prescription = Prescription.find_by(id: params[:id])
-    @symptoms = @prescription.symptoms
+    prescription = Prescription.find_by(id: params[:id])
+    symptoms = prescription.symptoms
     
-    render json: @symptoms
+    render json: {symptoms: symptoms, prescription: prescription}
   end
 
 
