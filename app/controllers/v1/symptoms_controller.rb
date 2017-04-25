@@ -9,9 +9,10 @@ class V1::SymptomsController < ApplicationController
   end
 
   def create
+    byebug
     prescription = Prescription.find(symptom_params[:prescriptionId])
 
-    newsymptom = Symptom.create(name: symptom_params[:name])
+    newsymptom = Symptom.new(name: symptom_params[:name])
     newsymptom.prescription_id = prescription.id
     newsymptom.save
 
@@ -19,12 +20,13 @@ class V1::SymptomsController < ApplicationController
     newsymptomLog.symptom_id = newsymptom.id
     newsymptomLog.save
 
-    byebug
   end
 
   def show
-    byebug
     symptom = Symptom.find_by(id: params[:id])
+    byebug
+    symptomLogs = symptom.symptom_logs
+
     render json: symptom
   end
 
