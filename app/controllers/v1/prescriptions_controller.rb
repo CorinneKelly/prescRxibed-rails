@@ -1,6 +1,6 @@
 
 class V1::PrescriptionsController < ApplicationController
-  
+
   def index
     account = @current_account
     @prescriptions = account.prescriptions
@@ -19,9 +19,9 @@ class V1::PrescriptionsController < ApplicationController
     newSchedule = Schedule.new(schedule_params)
     newSchedule.prescription_id = newPrescription.id
     newSchedule.save
-    
+
     newEvent = GoogleEventSerializer.new(newPrescription, newSchedule)
-    
+
     request_body = newEvent.determineSerializeType
     if request_body.class == Array
       response = []
@@ -39,8 +39,29 @@ class V1::PrescriptionsController < ApplicationController
   def show
     prescription = Prescription.find_by(id: params[:id])
     symptoms = prescription.symptoms
-    
+
     render json: {symptoms: symptoms, prescription: prescription}
+  end
+
+  def destroy
+    account = @current_account
+    @prescription = Prescription.find_by(id: destroy_params[:id])
+    @schedule = @prescription.schedule
+    response = []
+    if @schedule[:frequency] == "daily"
+      hours = @schedule[:hours].map{|h| h.hour}.sort
+      hours.map do |hour|
+        request = {eventId: "0000#{@prescription[:id]}#{hour}"}
+        newApiRequest = GoogleCalendarApi.new(account.googleToken, request)
+        response << newApiRequest.deleteEvent
+      end
+    else
+      request = {eventId: "0000#{@prescription[:id]}"}
+      newApiRequest = GoogleCalendarApi.new(account.googleToken, request)
+      response << newApiRequest.deleteEvent
+    end
+    @prescription.destroy
+    redirect_to :action => :index, status: 303
   end
 
 
@@ -50,5 +71,9 @@ class V1::PrescriptionsController < ApplicationController
   end
   def schedule_params
     params.require(:prescriptionData).require(:schedule).permit(:start_date, :end_date, :expiration_date, :frequency, :hours => [], :weekdays => [], :month_days => [])
+  end
+
+  def destroy_params
+    params.permit(:id)
   end
 end
