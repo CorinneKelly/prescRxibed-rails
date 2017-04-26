@@ -21,4 +21,9 @@ class GoogleCalendarApi
 	end
 
 
+	def deleteEvent
+		auth_header = { "Authorization": "Bearer #{@access_token}"}
+		@response = HTTParty.delete("https://www.googleapis.com/calendar/v3/calendars/primary/events/#{@request_body[:eventId]}", headers: auth_header)
+	end
+
 end
