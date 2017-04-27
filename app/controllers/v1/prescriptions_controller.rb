@@ -9,7 +9,6 @@ class V1::PrescriptionsController < ApplicationController
   end
 
   def create
-
     account = @current_account
 
     newPrescription = Prescription.new(prescription_params)
@@ -39,7 +38,6 @@ class V1::PrescriptionsController < ApplicationController
   def show
     prescription = Prescription.find_by(id: params[:id])
     symptoms = prescription.symptoms
-
     render json: {symptoms: symptoms, prescription: prescription}
   end
 
