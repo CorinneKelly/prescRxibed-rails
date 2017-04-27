@@ -19,7 +19,7 @@ class V1::SymptomsController < ApplicationController
     newsymptomLog = SymptomLog.new(severity: symptom_params[:severity], description: symptom_params[:description], uploadedFiles: symptom_params[:uploadedFiles])
     newsymptomLog.symptom_id = newsymptom.id
     newsymptomLog.save
-    
+
   end
 
   def show
